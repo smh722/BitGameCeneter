@@ -1,3 +1,5 @@
+<%@page import="com.bit.gamecenter.vo.RankVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,6 +8,11 @@
 <meta charset="UTF-8">
 <title>Snake</title>
 	<style>
+	html, body{
+		margin: 0px;
+        padding: 0px;
+		height: 100%;
+	}
 		.main{
             position: absolute;
             margin: 0px;
@@ -14,24 +21,40 @@
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
         }
+        .rank{
+        	position: absolute;
+            margin: 0px;
+            padding: 0px;
+            top: 30%;
+            left: 80%;
+            transform: translateX(-50%) translateY(-50%);
+            color: white;
+        
+        }
         .bg{
-            background: linear-gradient(to right, #e91e63, blue);
+        	position: absolute;
+        	background: linear-gradient(to right, #e91e63, blue);
             margin: 0px;
             padding: 0px;
             height: 100%;
             width: 100%;
             
         }
-        .msg{
-         font-size: 50px;
+        h1{
+        margin: 0px;
+        padding: 0px;	       
+         font-size: 100px;
          color: white;
         }
+        
 	</style>
 </head>
 <body>
 	<!-- 기본 게임 canvas 생성 -->
-	<div class="bg"></div>
-	<div class="msg"><h1>Snake Game</h1></div>
+	<div class="bg">
+		<h1>Snake Game</h1>
+	</div>
+	
 	<div class="main">
 	<canvas id="gc" width="400" height="400"></canvas>
 	</div>
@@ -80,7 +103,8 @@
                 ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs-2, gs-2);
                 
                 if(tail>5&&trail[i].x==px && trail[i].y==py) {
-                    window.location.href="GameOver.jsp";
+                	
+                	insertrank(tail);
                 }
             }
 			//움직임에 맞춰서 trail에 좌표추가
@@ -124,6 +148,28 @@
                     break;
             }
         }
+        function insertrank(tail){
+        	window.location.href="Gameover.do?score="+tail;
+        }
     </script>
+    
+    <div class="rank">
+	<table class="rankboard" border="5" cellpadding="0" cellspacing="0" width=500px>
+		<tr>
+				<td>Score</td>
+				<td>regdate</td>
+				<td>Id</td>
+		</tr>
+		<%List<RankVO> list = (List) request.getAttribute("list");
+		for(RankVO vo: list){
+	%>
+		<tr>
+				<td><%=vo.getScore() %></td>
+				<td><%=vo.getRegdate() %></td>
+				<td><%=vo.getId() %></td>
+		</tr>
+	<%} %>
+	</table>
+	</div>
 </body>
 </html>

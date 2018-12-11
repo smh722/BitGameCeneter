@@ -7,7 +7,7 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias alias="gamer" type="com.bit.gamecenter.vo.GamerVO" />
-<!-- 		<typeAlias alias="rank" type="com.bit.gamecenter.vo.RankVO" /> -->
+		<typeAlias alias="rank" type="com.bit.gamecenter.vo.RankVO" />
 	</typeAliases>
 	<!-- DataSource 설정 -->
 	<environments default="development">
@@ -24,6 +24,6 @@
 	<!-- Sql Mapper 설정 -->
 	<mappers>
 		<mapper resource="mappings/gamer_mapping.xml" />
-<!-- 		<mapper resource="mappings/rank_mapping.xml" /> -->
+		<mapper resource="mappings/rank_mapping.xml" />
 	</mappers>
 </configuration>

@@ -32,14 +32,14 @@ public class GamerController {
 			if (vo2.getPassword().equals(vo.getPassword())) {
 				session.setAttribute("id", vo2.getId());
 				session.setAttribute("password", vo2.getPassword());
-				return "Snake.jsp";
+				return "game.do";
 
 			} else {
-				session.setAttribute("error", "아이디가 올바르지 않습니다.");
+				session.setAttribute("error", "Id Check.");
 				return "joinpage.jsp";
 			}
 		} else {
-			session.setAttribute("error", "비밀번호가 올바르지 않습니다");
+			session.setAttribute("error", "Password Check");
 			return "joinpage.jsp";
 		}
 

@@ -10,7 +10,9 @@
 
 </head>
 <body>
-
+<div class="bg">
+		<h1>Snake Game</h1>
+	</div>
 				<center>
 					<h2>비밀번호 찾기</h2>
 					<hr>

@@ -11,9 +11,14 @@
 		<result property="id" column="id"/>
 	</resultMap>
 	
-	<select id="getRank" resultMap="rankResult">
-		SELECT G.NAME, SCORE, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) regdate FROM RANK R, GAMER G 
+	<select id="getRanking" resultMap="rankResult">
+		SELECT ID, SCORE, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) regdate FROM RANK
 	</select>
+	
+	<select id="selectBestScore" resultMap="rankResult">
+		SELECT MAX(SCORE) FROM RANK where id=#{id}
+	</select>
+	
 	<insert id="insertRank">
 		insert into rank values (rank_seq.nextval, #{score}, #{gamename}, sysdate, #{id})
 	</insert>
