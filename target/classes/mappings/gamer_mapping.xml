@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GamerDao">
+
+	<resultMap type="gamer" id="gamerResult">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="passwrod" column="password"/>
+	</resultMap>
+
+ 	
+	<insert id="insert">
+		insert into GAMER values (#{id}, #{name}, #{password})
+	</insert>
+
+	<select id="getGamervo" resultType="gamer">
+		SELECT ID, NAME, PASSWORD FROM GAMER WHERE ID=#{id}
+	</select>
+</mapper>
