@@ -21,8 +21,14 @@ public class RankController {
 	public String insertRank(RankVO vo, HttpSession session) {
 		vo.setGamename("snake");
 		vo.setId((String)session.getAttribute("id"));
-		int best = rankservice.selectBestScore(vo);
-		if(best>=5) {
+		int score = vo.getScore();
+		Integer best = rankservice.selectBestScore(vo);
+		
+		if(best==null ) {
+			rankservice.insertRank(vo);
+			return "GameOver.jsp";
+			
+		}else if(score>best.intValue()){
 			rankservice.insertRank(vo);
 			return "GameOver.jsp";
 		}else {

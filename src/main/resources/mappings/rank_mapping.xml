@@ -12,10 +12,10 @@
 	</resultMap>
 	
 	<select id="getRanking" resultMap="rankResult">
-		SELECT ID, SCORE, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) regdate FROM RANK
+		SELECT ID, SCORE, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) regdate FROM RANK ORDER BY SCORE DESC
 	</select>
 	
-	<select id="selectBestScore" resultMap="rankResult">
+	<select id="selectBestScore" resultType="int">
 		SELECT MAX(SCORE) FROM RANK where id=#{id}
 	</select>
 	

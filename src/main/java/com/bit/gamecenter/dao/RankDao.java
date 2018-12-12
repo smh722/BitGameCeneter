@@ -24,17 +24,8 @@ public class RankDao {
 		return mybatis.selectList("RankDao.getRanking");
 	}
 
-	public int selectBestScore(RankVO vo) {
-		int num = vo.getScore();
-		vo = mybatis.selectOne("RankDao.selectBestScore",vo);
-		System.out.println(vo.getScore());
-		
-		if(vo.getScore()>num) {
-			return num;
-			
-		}else {
-			return -1;
-		}
+	public Integer selectBestScore(RankVO vo) {
+		return mybatis.selectOne("RankDao.selectBestScore",vo);
 	}
 
 }

@@ -23,7 +23,7 @@ public class RankService {
 		return dao.getRanking();
 	}
 
-	public int selectBestScore(RankVO vo) {
+	public Integer selectBestScore(RankVO vo) {
 		return dao.selectBestScore(vo);
 	}
 
