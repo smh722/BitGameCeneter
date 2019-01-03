@@ -40,31 +40,40 @@
             width: 100%;
             
         }
-        h1{
+        h1,h2{
         margin: 0px;
         padding: 0px;	       
          font-size: 100px;
          color: white;
+        }
+        #score {
+        	margin: 0px;
+        	padding: 0px;
+        	font-size: 15px;
+        	color: yellow;
         }
         
 	</style>
 </head>
 <body>
 	<!-- 기본 게임 canvas 생성 -->
-	<div class="bg">
-		<h1>Snake Game</h1>
+	<div class="bg" id="score">
+		<h1>Snake Game 시즌2</h1>
 	</div>
-	
 	<div class="main">
 	<canvas id="gc" width="400" height="400"></canvas>
 	</div>
 	<script>
 		//기초 세팅(켄버스잡아주기, 이벤트잡기, 게임시간설정)
+	
+
+
+
         window.onload = function () {
             canv = document.getElementById("gc");
             ctx = canv.getContext("2d");
             document.addEventListener("keydown", keyPush);
-            setInterval(game, 1000/15);
+            setInterval(game, 1000/35);
         }
         //초기 시작값 설정(10,10)
         px = py = 10;
@@ -77,6 +86,7 @@
         //기본 길이 및 배열생성
         trail = [];
         tail = 5;
+        score;
         //canvas 밖으로 이동시 반대편에서 등장
         function game() {
             px += xv;
@@ -97,12 +107,13 @@
          //켄버스 바탕
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canv.width, canv.height);
+        
 		//자신의 색상, 기본 
             ctx.fillStyle = "lime";
             for(var i=0;i<trail.length;i++) {
                 ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs-2, gs-2);
                 
-                if(tail>5&&trail[i].x==px && trail[i].y==py) {
+                if(tail>5 && trail[i].x==px && trail[i].y==py) {
                 	
                 	insertrank(tail);
                 }
@@ -116,13 +127,18 @@
             // red point 와 만날시 꼬리길이추가 & 랜덤위치에 red point 좌표생성
             if (ax == px && ay == py) {
                 tail++;
+                score = tail;
                 ax = Math.floor(Math.random() * tc);
                 ay = Math.floor(Math.random() * tc);
+     	       ctx.font = "200px Georgia";
+        	   ctx.fillStyle = "yellow";
+         	   ctx.fillText(score, 150, 200);
             }
 			// red 포인트 생성(초기위치 15,15)
             ctx.fillStyle = "red";
             ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
             }
+        
         //이벤트 인식, 움직임 좌표설정, 움직임 반대방향시 실행안함
         function keyPush(evt) {
         	switch (evt.keyCode) {
@@ -147,10 +163,13 @@
                     }
                     break;
             }
+        	
         }
         function insertrank(tail){
-        	window.location.href="Gameover.do?score="+tail;
+        	
+        	window.location.href="Gameover.do?score="+ encodeURIComponent(tail);
         }
+        
     </script>
     
     <div class="rank">
